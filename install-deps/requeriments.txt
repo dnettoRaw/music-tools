@@ -1,0 +1,10 @@
+mp3gain
+mp3mp3info
+ffmpeg
+spotdlmp3gain
+mp3mp3info
+ffmpeg
+spotdlmp3gain
+mp3mp3info
+ffmpeg
+spotdl
