@@ -1,0 +1,3 @@
+[submodule "mp3duration"]
+	path = mp3duration
+	url = https://github.com/dnettoRaw/mp3duration.git
