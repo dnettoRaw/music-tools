@@ -5,3 +5,5 @@
 for f in "$@" ; do 
 	mv "$f" "${f// /-}"
 done
+
+# Path: white-space\white-space.sh
