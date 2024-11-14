@@ -7,7 +7,7 @@
 debug=0
 
 declare -a replace_map=(
-  '$'='S' 'Ã¨'='e' 'Ãª'='e' 'Ã©'='e' 'À'='A' 'Á'='A' 'Â'='A' 'Ã'='A' 'Ä'='A' 'Å'='A' 'Æ'='AE' 'Ç'='C'
+  '$'='S' 'Ã'='A' 'Ã¨'='e' 'Ãª'='e' 'Ã©'='e' 'À'='A' 'Á'='A' 'Â'='A' 'Ä'='A' 'Å'='A' 'Æ'='AE' 'Ç'='C'
   'È'='E' 'É'='E' 'Ê'='E' 'Ë'='E' 'Ì'='I' 'Í'='I' 'Î'='I' 'Ï'='I' 'Ð'='D' 'Ñ'='N' 'Ò'='O' 'Ó'='O' 'Ô'='O'
   'Õ'='O' 'Ö'='O' 'Ø'='O' 'Ù'='U' 'Ú'='U' 'Û'='U' 'Ü'='U' 'Ý'='Y' 'ß'='s' 'à'='a' 'á'='a' 'â'='a' 'ã'='a'
   'ä'='a' 'å'='a' 'æ'='ae' 'ç'='c' 'è'='e' 'é'='e' 'ê'='e' 'ë'='e' 'ì'='i' 'í'='i' 'î'='i' 'ï'='i' 'ñ'='n'
@@ -23,13 +23,14 @@ declare -a replace_map=(
   'Ŭ'='U' 'ŭ'='u' 'Ů'='U' 'ů'='u' 'Ű'='U' 'ű'='u' 'Ų'='U' 'ų'='u' 'Ŵ'='W' 'ŵ'='w' 'Ŷ'='Y' 'ŷ'='y' 'Ÿ'='Y'
   'Ź'='Z' 'ź'='z' 'Ż'='Z' 'ż'='z' 'Ž'='Z' 'ž'='z' 'ſ'='s' 'ƒ'='f' 'Ơ'='O' 'ơ'='o' 'Ư'='U' 'ư'='u' 'Ǎ'='A'
   'ǎ'='a' 'Ǐ'='I' 'ǐ'='i' 'Ǒ'='O' 'ǒ'='o' 'Ǔ'='U' 'ǔ'='u' 'Ǖ'='U' 'ǖ'='u' 'Ǘ'='U' 'ǘ'='u' 'Ǚ'='U' 'ǚ'='u'
-  'Ǜ'='U' 'ǜ'='u' 'Ǻ'='A' 'ǻ'='a' 'Ǽ'='AE' 'ǽ'='ae' 'Ǿ'='O' 'ǿ'='o' '&'='e' ' '='-' 
+  'Ǜ'='U' 'ǜ'='u' 'Ǻ'='A' 'ǻ'='a' 'Ǽ'='AE' 'ǽ'='ae' 'Ǿ'='O' 'ǿ'='o' '&'='e' ' '='_' '-'='_'
 )
+
 
 function namefix(){
     local filename="$1"
     local fixedname=$(echo "$filename" | tr '[:upper:]' '[:lower:]')  # Converte para minúsculas usando tr
-    fixedname="${fixedname//[^a-zA-Z0-9.]/-}" # Substitui caracteres especiais por hífen
+    fixedname="${fixedname//[^a-zA-Z0-9.]/_}" # Substitui caracteres especiais por _
     # retira os numero do nome do arquivo 
     fixedname=$(echo "$fixedname" | tr -d '0-9')
 
@@ -37,7 +38,7 @@ function namefix(){
       fixedname="${fixedname//${key}/${replace_map[$key]}}"
     done
     
-    echo "${fixedname}3" | tr -s '-'  # Remove hífens extras
+    echo "${fixedname}3" | tr -s '_'  # Remove hífens extras
 }
 
 function printFormated(){
